@@ -1,5 +1,6 @@
 require 'album'
 require 'rspec'
+require 'song'
 
 describe '#Album' do
   before(:each) do
@@ -77,4 +78,24 @@ describe '#Album' do
       expect(album.search("jazz")).to(eq(true))
     end
   end
+
+  describe('#songs') do
+    it("returns an album's songs") do
+      album = Album.new("Giant Steps", nil, nil, nil, nil)
+      album.save()
+      song = Song.new("Naima", album.id, nil)
+      song.save()
+      song2 = Song.new("Cousin Mary", album.id, nil)
+      song2.save()
+      expect(album.songs).to(eq([song, song2]))
+    end
+  end
+
+  # describe('#album_sort') do
+  #   it('sorts albums alphabetically') do
+  #     album = Album.new("apple")
+  #     album2 = Album.new("bass")
+  #     expect(album.sort("bass", "apple")).to(eq("apple", "bass"))
+  #   end
+  # end
 end

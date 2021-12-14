@@ -10,6 +10,7 @@ class Album
     @genre = genre
     @year = year
     @artist = artist
+    @searched = true
   end
 
   def self.all
@@ -54,10 +55,20 @@ class Album
 
   def search(word)
     if (@name == word) || (@genre == word) || (@year == word) || (@artist == word)
+      @searched = true
       true
     else
+      @searched = false
       false
     end
+  end
+
+  def sort
+   @@Albums.sort
+  end
+
+  def songs
+    Song.find_by_album(self.id)
   end
   
 end
