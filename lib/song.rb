@@ -1,18 +1,19 @@
 class Song
   attr_reader :id
-  attr_accessor :name, :album_id
+  attr_accessor :name, :album_id, :lyrics
 
   @@songs = {}
   @@total_rows = 0
 
-  def initialize(name, album_id, id)
+  def initialize(name, album_id, id, lyrics)
     @name = name
     @album_id = album_id
     @id = id || @@total_rows += 1
+    @lyrics = lyrics
   end
 
   def ==(song_to_compare)
-    (self.name() == song_to_compare.name()) && (self.album_id() == song_to_compare.album_id())
+    (self.name() == song_to_compare.name()) && (self.album_id() == song_to_compare.album_id()) && (self.lyrics() == song_to_compare.lyrics())
   end
 
   def self.all
@@ -20,17 +21,22 @@ class Song
   end
 
   def save
-    @@songs[self.id] = Song.new(self.name, self.album_id, self.id)
+    @@songs[self.id] = Song.new(self.name, self.album_id, self.id, self.lyrics)
   end
 
   def self.find(id)
     @@songs[id]
   end
 
-  def update(name, album_id)
-    self.name = name
+  def update(name, album_id, lyrics)
+    if name.length > 0
+      self.name = name
+    end
     self.album_id = album_id
-    @@songs[self.id] = Song.new(self.name, self.album_id, self.id)
+    if lyrics.length > 0
+      self.lyrics = lyrics
+    end
+    @@songs[self.id] = Song.new(self.name, self.album_id, self.id, self.lyrics)
   end
 
   def delete

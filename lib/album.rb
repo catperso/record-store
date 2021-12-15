@@ -1,5 +1,5 @@
 class Album
-  attr_accessor :id, :name, :genre, :year, :artist, :search
+  attr_accessor :id, :name, :genre, :year, :artist, :search, :sold
 
   @@albums = {}
   @@total_rows = 0
@@ -11,6 +11,7 @@ class Album
     @year = year
     @artist = artist
     @searched = true
+    @sold = false
   end
 
   def self.all
@@ -63,6 +64,17 @@ class Album
     new_array
   end
 
+  def self.sold(name_searched)
+    sold_array = []
+    @@albums.values.each do |album|
+      if album.name == name_searched
+        album.sold = true
+        sold_array.push(album)
+      end
+    end
+    sold_array
+  end
+
   def self.sort
     array = @@albums.values.sort_by! &:name
     @@albums = {}
@@ -77,6 +89,5 @@ class Album
   
 end
 
-#search method
 #sold method
 #sorting sold albums

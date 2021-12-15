@@ -1,16 +1,22 @@
 <h1>All Sales Vinyl</h1>
 
 <h3>Available Records</h3>
-
 <% if @albums.any? %>
   <ul> <% @albums.each do |album| %>      
-    <li><a href="/albums/<%= album.id %>"><%= album.name %> By: <%= album.artist %> </a> </li>
+    <% if album.sold == false %>
+      <li><a href="/albums/<%= album.id %>"><%= album.name %> By: <%= album.artist %> </a> </li>
+    <% end %>
   <% end %>
+  </ul>
 <% else %>
-  </ul> <p>There are currently no records to display.</p>
+  <p>There are currently no records to display.</p>
 <% end %>
 
 <a href="/albums/new">Add a new album</a>
+<br>
+<form action="/albums/sort" method="post">
+  <button type="submit" class="btn">Sort Alphabetically</button>
+</form>
 
 <form action="/albums">
   <div class="form-group">
@@ -19,15 +25,36 @@
   </div>
   <button type="submit" class="btn">Go!</button>
 </form>
+
+<h3>Searched Records: </h3>
 <% array = Album.search(params[:search]) %>
 <% if array.any? %>
   <ul> <% array.each do |album| %>      
     <li><a href="/albums/<%= album.id %>"><%= album.name %> By: <%= album.artist %> </a> </li>
   <% end %>
+  </ul> 
 <% else %>
-  </ul> <p>There are currently no searched records to display.</p>
+  <p>There are currently no searched records to display.</p>
 <% end %>
 <br>
-<form action="/albums/sort" method="post">
-<button type="submit" class="btn">Sort Alphabetically</button>
+
+<h3> Buy a record:</h3>
+<form action="/albums">
+  <div class="form-group">
+    <label for="sold">Search by name:</label>
+    <input id="sold" name="sold" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Buy that ish!</button>
 </form>
+
+<h3>Sold Records: </h3>
+<% sold_array = Album.sold(params[:sold]) %>
+<% if sold_array.any? %>
+  <ul> <% sold_array.each do |album| %>      
+    <li><a href="/albums/<%= album.id %>"><%= album.name %> By: <%= album.artist %> </a> </li>
+  <% end %>
+  </ul>
+<% else %>
+  <p>There are currently no sold records to display.</p>
+<% end %>
+<br>
