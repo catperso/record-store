@@ -54,4 +54,12 @@ class Song
   def album
     Album.find(self.album_id)
   end
+
+  def self.sort
+    array = @@songs.values.downcase.sort_by! &:name
+    @@songs = {}
+    array.each do |element|
+      @@songs[element.id] = element
+    end
+  end
 end

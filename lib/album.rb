@@ -76,3 +76,7 @@ class Album
   end
   
 end
+
+#search method
+#sold method
+#sorting sold albums
