@@ -16,8 +16,4 @@
   <button type="submit">Delete song</button>
 </form>
 
-<form action="/songs/sort" method="post">
-<button type="submit" class="btn">Sort Alphabetically</button>
-</form>
-
 <a href="/albums/<%= @song.album.id %>">Back to <%= @song.album.name %></a>

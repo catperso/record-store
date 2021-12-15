@@ -67,10 +67,11 @@ get('/albums/:id/songs/:song_id') do
   erb(:song)
 end
 
-post('/songs/sort') do
+post('/albums/:id/songs/sort') do
   Song.sort
   @song = Song.all
   erb(:song)
+end
 
 # Post a new song. After the song is added, Sinatra will route to the view for the album the song belongs to.
 post('/albums/:id/songs') do

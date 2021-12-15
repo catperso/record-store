@@ -72,10 +72,11 @@ describe '#Album' do
     end
   end
 
-  describe('#album_search') do
+  describe('.search') do
     it('finds an album either by name, genre, year and artist') do
       album = Album.new("Giant Steps", nil, "jazz", 1900, "john coltrane")
-      expect(album.search("jazz")).to(eq(true))
+      album.save
+      expect(Album.search("Giant Steps")).to(eq([album]))
     end
   end
 

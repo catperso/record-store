@@ -103,7 +103,7 @@ describe '#Song' do
     it('sorts songs alphabetically') do
       song = Song.new("Banana", nil, nil)
       song.save()
-      song2 = Song.new("apricot", nil, nil)
+      song2 = Song.new("Apricot", nil, nil)
       song2.save()
       Song.sort
       expect(Song.all).to(eq([song2, song]))

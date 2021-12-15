@@ -25,5 +25,9 @@
   <button type="submit" class="btn">Add song</button>
 </form>
 
+<form action="/albums/<%= @album.id %>/songs/sort" method="post">
+<button type="submit" class="btn">Sort Songs Alphabetically</button>
+</form>
+
 <p><a href="/albums/<%= @album.id %>/edit">Edit album</a></p>
 <a href="/albums">Return to album list</a>

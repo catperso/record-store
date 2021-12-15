@@ -56,7 +56,7 @@ class Song
   end
 
   def self.sort
-    array = @@songs.values.downcase.sort_by! &:name
+    array = @@songs.values.sort_by! &:name
     @@songs = {}
     array.each do |element|
       @@songs[element.id] = element

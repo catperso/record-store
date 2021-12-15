@@ -1,5 +1,5 @@
 class Album
-  attr_accessor :id, :name, :genre, :year, :artist
+  attr_accessor :id, :name, :genre, :year, :artist, :search
 
   @@albums = {}
   @@total_rows = 0
@@ -53,14 +53,14 @@ class Album
     @@albums.delete(self.id)
   end
 
-  def search(word)
-    if (@name == word) || (@genre == word) || (@year == word) || (@artist == word)
-      @searched = true
-      true
-    else
-      @searched = false
-      false
+  def self.search(word_searched)
+    new_array = []
+    @@albums.values.each do |album|
+      if album.name == word_searched || album.genre == word_searched || album.year == word_searched || album.artist == word_searched
+        new_array.push(album)
+      end
     end
+    new_array
   end
 
   def self.sort
