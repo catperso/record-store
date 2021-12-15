@@ -91,11 +91,14 @@ describe '#Album' do
     end
   end
 
-  # describe('#album_sort') do
-  #   it('sorts albums alphabetically') do
-  #     album = Album.new("apple")
-  #     album2 = Album.new("bass")
-  #     expect(album.sort("bass", "apple")).to(eq("apple", "bass"))
-  #   end
-  # end
+  describe('#album_sort') do
+    it('sorts albums alphabetically') do
+      album = Album.new("bass", nil, nil, nil, nil)
+      album.save()
+      album2 = Album.new("apple", nil, nil, nil, nil)
+      album2.save()
+      Album.sort
+      expect(Album.all).to(eq([album2, album]))
+    end
+  end
 end
