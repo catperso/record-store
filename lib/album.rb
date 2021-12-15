@@ -63,8 +63,12 @@ class Album
     end
   end
 
-  def sort
-   @@Albums.sort
+  def self.sort
+    array = @@albums.values.sort_by! &:name
+    @@albums = {}
+    array.each do |element|
+      @@albums[element.id] = element
+    end
   end
 
   def songs

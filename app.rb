@@ -6,7 +6,7 @@ require('pry')
 also_reload('lib/**/*.rb')
 
 get('/') do
-  @albums = Album.all
+  @albums = Album.sort
   erb(:albums)
 end
 
@@ -17,6 +17,12 @@ end
 
 get('/albums/new') do
   erb(:new_album)
+end
+
+post('/albums/sort') do
+  Album.sort
+  @albums = Album.all
+  erb(:albums)
 end
 
 post('/albums') do

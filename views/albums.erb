@@ -6,7 +6,7 @@
   <ul>
     <% @albums.each do |album| %>
       <% if album.search("jazz") || true %>
-        <li><a href="/albums/<%= album.id %>"><%= album.name %></a></li>
+        <li><a href="/albums/<%= album.id %>"><%= album.name %> </a></li>
       <% end %>
     <% end %>
   </ul>
@@ -24,4 +24,6 @@
   <button type="submit" class="btn">Go!</button>
 </form>
 <br>
-<button id="album_sort" type="submit" class="btn">Sort Albums Alphabetically</button>
+<form action="/albums/sort" method="post">
+<button type="submit" class="btn">Sort Alphabetically</button>
+</form>
